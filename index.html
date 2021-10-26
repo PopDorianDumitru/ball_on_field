@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #field {
+      width: 200px;
+      height: 150px;
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+    }
+    #ball{
+      height: 40px;
+      width: 40px;
+      position:absolute;
+      transition: all 0.5s;
+      
+    }
+  
+  </style>
+</head>
+
+<body style="height:2000px">
+
+  Click on a field to move the ball there.
+  <br> The ball should never leave the field.
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    let elem = document.getElementById("ball");
+    let pitch = document.getElementById("field");
+    let coords =  pitch.getBoundingClientRect();
+    let bordwid = (pitch.offsetHeight - pitch.clientHeight)/2;
+    elem.style.top = coords.top + bordwid + 'px';
+    elem.style.left = coords.left + bordwid + 'px';
+    field.onclick = (event) =>{  
+      let y = event.clientY - elem.offsetHeight/2;
+      let x = event.clientX - elem.offsetWidth/2;
+      let bordwid = (pitch.offsetHeight - pitch.clientHeight)/2;
+      elem.style.top = y + 'px';
+      elem.style.left = x + 'px';
+      if(y < coords.top + bordwid)
+        elem.style.top = pitch.offsetTop + bordwid +'px';
+      if(y + elem.clientHeight > coords.bottom-bordwid)
+        elem.style.top = coords.bottom - bordwid - elem.clientHeight + 'px';
+      if(x < coords.left + bordwid)
+        elem.style.left = coords.left + bordwid + 'px';
+      if(x + elem.clientWidth > coords.right - bordwid)
+        elem.style.left =  coords.right - bordwid - elem.clientWidth+ 'px';
+    }
+  </script>
+
+</body>
+</html>
